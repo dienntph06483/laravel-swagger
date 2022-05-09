@@ -1,0 +1,52 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    mysql:
+      image: mysql:8.0
+      volumes:
+          - mysql:/var/lib/mysql
+      environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=arc_learning
+          - MYSQL_USER=arc_learning
+          - MYSQL_PASSWORD=arc_learning
+      ports:
+          - "2224:3306"
+
+    webserver:
+      image: nginx:alpine
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "80:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+
+    redis:
+      image: redis:alpine
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mysql
+        environment:
+            - PMA_HOSTS=mysql
+            - UPLOAD_LIMIT=1300M
+        ports:
+            - 8080:80
+volumes:
+    mysql:
+    webserver:
+    php-fpm:
+    redis:
+    phpmyadmin:
