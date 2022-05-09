@@ -8,7 +8,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * Class Controller.
+ * @OA\OpenApi(
+ *     @OA\Info(
+ *         version="1.0",
+ *         title="Arc Learning App Api"
+ *     )
+ * )
  */
 class Controller extends BaseController
 {

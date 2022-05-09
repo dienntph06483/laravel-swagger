@@ -1,0 +1,360 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Arc Learning App Api",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "operationId": "8dcb70df1020986038d098cc08d05dae",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "user@user.com",
+                                    "password": "secret"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE2NTIwOTMzMzksImV4cCI6MTY1MjA5NjkzOSwibmJmIjoxNjUyMDkzMzM5LCJqdGkiOiI3aGplek52VmhYSXR3TDloIiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.NcdIoqlL8JRL_cDFaA40cvNEAZOAVAqUN23ZlchuVng"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "string",
+                                            "example": "3600"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "2"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "user"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Test User"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@user.com"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "password_changed_at": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "active": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "timezone": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "last_login_at": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "last_login_ip": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "to_be_logged_out": {
+                                                    "type": "string",
+                                                    "example": "0"
+                                                },
+                                                "provider": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "provider_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "deleted_at": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register User",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Test User",
+                                    "email": "user@user.com",
+                                    "password": "secret"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User successfully registered"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Test User"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@user.com"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "operationId": "69281b12abb272c76871f19cb17ca563",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User successfully signed out"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/user-profile": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User Profile",
+                "operationId": "4188c99fa2637f92b254e6526b44fc50",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "2"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "user"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Test User"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@user.com"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "password_changed_at": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "active": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "timezone": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "last_login_at": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "last_login_ip": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "to_be_logged_out": {
+                                                    "type": "string",
+                                                    "example": "0"
+                                                },
+                                                "provider": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "provider_id": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01T15:57:41.000000Z"
+                                                },
+                                                "deleted_at": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

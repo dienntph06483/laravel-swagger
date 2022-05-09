@@ -12,6 +12,7 @@
         "php": "^7.4|^8.0",
         "arcanedev/log-viewer": "8.x",
         "cviebrock/eloquent-sluggable": "^8.0",
+        "darkaonline/l5-swagger": "^8.3",
         "darkghosthunter/laraguard": "^3.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

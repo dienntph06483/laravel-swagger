@@ -20,9 +20,60 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Login
+     * @OA\Post (
+     *     path="/api/auth/login",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="email",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string"
+     *                      )
+     *                 ),
+     *                 example={
+     *                     "email":"user@user.com",
+     *                     "password":"secret"
+     *                }
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="access_token", type="string", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE2NTIwOTMzMzksImV4cCI6MTY1MjA5NjkzOSwibmJmIjoxNjUyMDkzMzM5LCJqdGkiOiI3aGplek52VmhYSXR3TDloIiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.NcdIoqlL8JRL_cDFaA40cvNEAZOAVAqUN23ZlchuVng"),
+     *              @OA\Property(property="token_type", type="string", example="bearer"),
+     *              @OA\Property(property="expires_in", type="string", example="3600"),
+     *              @OA\Property(property="user", type="object",
+     *    					@OA\Property(property="id", type="string", example="2"),
+     *    					@OA\Property(property="type", type="string", example="user"),
+     *    					@OA\Property(property="name", type="string", example="Test User"),
+     *    					@OA\Property(property="email", type="string", example="user@user.com"),
+     *    					@OA\Property(property="email_verified_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="password_changed_at", type="string", example="null"),
+     *    					@OA\Property(property="active", type="string", example="1"),
+     *    					@OA\Property(property="timezone", type="string", example="null"),
+     *    					@OA\Property(property="last_login_at", type="string", example="null"),
+     *    					@OA\Property(property="last_login_ip", type="string", example="null"),
+     *    					@OA\Property(property="to_be_logged_out", type="string", example="0"),
+     *    					@OA\Property(property="provider", type="string", example="null"),
+     *    					@OA\Property(property="provider_id", type="string", example="null"),
+     *    					@OA\Property(property="created_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="updated_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="deleted_at", type="string", example="null")
+     *    			)),
+     *          )
+     *      )
+     * )
      */
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
@@ -42,9 +93,52 @@ class AuthController extends Controller
     }
 
     /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Register User
+     * @OA\Post (
+     *     path="/api/auth/register",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="email",
+     *                          type="string"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string"
+     *                      )
+     *                 ),
+     *                 example={
+     *                     "name":"Test User",
+     *                     "email":"user@user.com",
+     *                     "password":"secret"
+     *                }
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="User successfully registered"),
+     *              @OA\Property(property="user", type="object",
+     *    					@OA\Property(property="name", type="string", example="Test User"),
+     *    					@OA\Property(property="email", type="string", example="user@user.com"),
+     *    					@OA\Property(property="created_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="updated_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="id", type="string", example="2"),
+     *    			)),
+     *          )
+     *      )
+     * )
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
@@ -70,9 +164,19 @@ class AuthController extends Controller
 
 
     /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Logout
+     * @OA\Post (
+     *     path="/api/auth/logout",
+     *     tags={"Auth"},
+     *     security={{"bearer_token":{}}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="User successfully signed out")
+     *          )
+     *      )
+     * )
      */
     public function logout() {
         auth('api')->logout();
@@ -90,9 +194,36 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * User Profile
+     * @OA\Get (
+     *     path="/api/auth/user-profile",
+     *     tags={"Auth"},
+     *     security={{"bearer_token":{}}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="user", type="object",
+     *    					@OA\Property(property="id", type="string", example="2"),
+     *    					@OA\Property(property="type", type="string", example="user"),
+     *    					@OA\Property(property="name", type="string", example="Test User"),
+     *    					@OA\Property(property="email", type="string", example="user@user.com"),
+     *    					@OA\Property(property="email_verified_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="password_changed_at", type="string", example="null"),
+     *    					@OA\Property(property="active", type="string", example="1"),
+     *    					@OA\Property(property="timezone", type="string", example="null"),
+     *    					@OA\Property(property="last_login_at", type="string", example="null"),
+     *    					@OA\Property(property="last_login_ip", type="string", example="null"),
+     *    					@OA\Property(property="to_be_logged_out", type="string", example="0"),
+     *    					@OA\Property(property="provider", type="string", example="null"),
+     *    					@OA\Property(property="provider_id", type="string", example="null"),
+     *    					@OA\Property(property="created_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="updated_at", type="string", example="2022-05-01T15:57:41.000000Z"),
+     *    					@OA\Property(property="deleted_at", type="string", example="null")
+     *    			)),
+     *          )
+     *      )
+     * )
      */
     public function userProfile() {
         return response()->json(auth('api')->user());
